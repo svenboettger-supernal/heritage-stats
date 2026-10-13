@@ -74,6 +74,9 @@ tr:hover td{background:color-mix(in srgb,var(--accent-soft) 40%,transparent)}
 .journey{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
 .journey i{display:inline-block;width:8px;height:8px;border-radius:2px}
 .empty{color:var(--muted);font-size:14px;padding:6px 0}
+.infobox{border-left:4px solid var(--accent)}
+.infobox code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--bg);padding:1px 5px;border-radius:3px}
+.optout{font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--accent);word-break:break-all}
 details.log summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 details.log summary::-webkit-details-marker{display:none}
 details.log summary .hint{font-size:13px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
@@ -135,6 +138,13 @@ details.log summary .hint{font-size:13px;color:var(--accent);text-decoration:und
       <p class="sub" style="margin-top:8px">Newest first, last 300. Crawler hits and direct GitHub hits are left out.</p>
       <div class="wrap"><table id="log"></table></div>
     </details>
+  </section>
+
+  <section class="infobox">
+    <h2>Keep yourself out of the numbers</h2>
+    <p class="sub">Open the Heritage page once with this link in every browser you use. That browser is then never logged again. The same link with <code>#track</code> switches it back on.</p>
+    <p><a class="optout" href="https://2027-heritage.links.getsupernal.ai/#ignore" target="_blank" rel="noopener">https://2027-heritage.links.getsupernal.ai/#ignore</a></p>
+    <p class="sub">Visits from the Supernal home network are also filtered out on the server, whatever the browser.</p>
   </section>
 </main>
 <script>
