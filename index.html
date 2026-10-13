@@ -7,104 +7,251 @@
 <title>Heritage 2027 Statistics</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Public+Sans:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#f5f6f3;--paper:#fdfdfb;--ink:#161d19;--muted:#5f6a64;--line:#d5dad4;--line-strong:#b6bfb8;--accent:#1e4b3a;--accent-ink:#f3f7f4;--accent-soft:#e2ece6;--warn:#9a6b12;--warn-soft:#f6ecd3;--bad:#9b3b2e;--display:"Source Serif 4",Georgia,serif;--body:"Public Sans",system-ui,sans-serif;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131816;--paper:#1a211d;--ink:#edf1ee;--muted:#9aa69f;--line:#2d3732;--line-strong:#43504a;--accent:#8fcaa9;--accent-ink:#10201a;--accent-soft:#1f3329;--warn:#e2b45a;--warn-soft:#3a2f14;--bad:#e58a7c;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#131816;--paper:#1a211d;--ink:#edf1ee;--muted:#9aa69f;--line:#2d3732;--line-strong:#43504a;--accent:#8fcaa9;--accent-ink:#10201a;--accent-soft:#1f3329;--warn:#e2b45a;--warn-soft:#3a2f14;--bad:#e58a7c;color-scheme:dark}
+:root{--bg:#f5f6f3;--paper:#fdfdfb;--ink:#161d19;--muted:#5f6a64;--line:#d5dad4;--line-strong:#b6bfb8;--accent:#1e4b3a;--accent-mid:#7fae95;--accent-ink:#f3f7f4;--accent-soft:#e2ece6;--warn:#9a6b12;--warn-soft:#f6ecd3;--bad:#9b3b2e;--good:#1e6b42;--display:"Source Serif 4",Georgia,serif;--body:"Public Sans",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131816;--paper:#1a211d;--ink:#edf1ee;--muted:#9aa69f;--line:#2d3732;--line-strong:#43504a;--accent:#8fcaa9;--accent-mid:#4d7f66;--accent-ink:#10201a;--accent-soft:#1f3329;--warn:#e2b45a;--warn-soft:#3a2f14;--bad:#e58a7c;--good:#7fd4a3;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131816;--paper:#1a211d;--ink:#edf1ee;--muted:#9aa69f;--line:#2d3732;--line-strong:#43504a;--accent:#8fcaa9;--accent-mid:#4d7f66;--accent-ink:#10201a;--accent-soft:#1f3329;--warn:#e2b45a;--warn-soft:#3a2f14;--bad:#e58a7c;--good:#7fd4a3;color-scheme:dark}
 *{box-sizing:border-box}[hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;padding:24px 16px 56px;margin:0}
-main{max-width:1040px;margin:0 auto;display:grid;gap:22px}
-h1{font-family:var(--display);font-weight:500;font-size:clamp(26px,4vw,36px);margin:0;line-height:1.1}h2{font-family:var(--display);font-weight:500;font-size:21px;margin:0}
-.sub{color:var(--muted);margin:0}
-header{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:flex-start}
-.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;padding:24px 16px 64px;margin:0}
+main{max-width:1080px;margin:0 auto;display:grid;gap:22px}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(26px,4vw,38px);margin:0;line-height:1.08;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:500;font-size:20px;margin:0;letter-spacing:-.01em}
+p{margin:0}.sub{color:var(--muted)}.num{font-variant-numeric:tabular-nums}
 button,input{font:inherit;color:inherit}
-.btn{padding:8px 14px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:4px;font-weight:500;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--accent)}.btn:disabled{opacity:.6;cursor:wait}
-label.auto{font-size:13px;color:var(--muted);display:inline-flex;gap:6px;align-items:center}
-.key{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--warn);padding:14px 18px;display:grid;gap:8px}
-.key input{padding:8px 10px;border:1px solid var(--line-strong);background:var(--bg);border-radius:4px;width:min(420px,100%);font-family:ui-monospace,Menlo,monospace}
-.err{color:var(--bad)}
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.kpis div{background:var(--accent-soft);padding:12px 14px;display:grid;gap:2px}
-.kpis .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}.kpis .v{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
-section{background:var(--paper);border:1px solid var(--line);padding:16px 18px;display:grid;gap:10px}.wrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;min-width:640px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}td.r,th.r{text-align:right}.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
-.ev{display:inline-block;padding:1px 7px;border-radius:3px;font-size:12px;font-weight:500;background:var(--bg);border:1px solid var(--line)}.ev.print{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}.ev.select{background:var(--warn-soft);color:var(--warn);border-color:var(--warn-soft)}
-.empty{color:var(--muted)}
-@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+header{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;align-items:flex-end}
+.lead{display:grid;gap:6px;min-width:0}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line-strong);flex:none}
+.dot.live{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
+.dot.err{background:var(--bad)}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:4px;font-weight:500;cursor:pointer;font-size:14px}
+.btn svg{width:14px;height:14px;display:block}
+.btn.ghost{background:transparent;color:var(--accent)}.btn.ghost:hover{background:var(--accent-soft)}
+.btn:disabled{opacity:.6;cursor:wait}.btn.busy svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.btn.busy svg{animation:none}}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.toggle input{appearance:none;width:34px;height:20px;border-radius:999px;background:var(--line-strong);position:relative;margin:0;cursor:pointer;transition:background .15s}
+.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s}
+.toggle input:checked{background:var(--accent)}.toggle input:checked::after{transform:translateX(14px)}
+.toggle input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.key{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--warn);padding:16px 18px;display:grid;gap:8px}
+.key input{padding:9px 10px;border:1px solid var(--line-strong);background:var(--bg);border-radius:4px;width:min(440px,100%);font-family:ui-monospace,Menlo,monospace}
+.err{color:var(--bad);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.kpis div{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);padding:12px 14px;display:grid;gap:2px}
+.kpis .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kpis .v{font-family:var(--display);font-size:28px;font-weight:500;line-height:1.1}
+.kpis .s{font-size:12px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+section{background:var(--paper);border:1px solid var(--line);padding:16px 18px;display:grid;gap:12px;align-content:start;min-width:0}
+.sechead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.chart{display:block;width:100%;height:auto;font-family:var(--body);font-variant-numeric:tabular-nums}
+.chart .lbl{font-size:11px;fill:var(--muted)}.chart .val{font-size:11px;fill:var(--ink);font-weight:600}.chart .axis{stroke:var(--line-strong);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.c-view{background:var(--accent-mid)}.c-select{background:var(--warn)}.c-print{background:var(--accent)}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:130px 1fr 36px;gap:10px;align-items:center;font-size:13px}
+.bar .t{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .track{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);width:0;transition:width .4s}
+.bar .n{text-align:right;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.card{border:1px solid var(--line);background:var(--bg);padding:12px 14px;display:grid;gap:6px}
+.card .ref{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.card .amt{font-family:var(--display);font-size:24px;font-weight:500;line-height:1.1}
+.card .lines{font-size:13px}.card .meta{font-size:12px;color:var(--muted)}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;background:var(--accent-soft);color:var(--accent);margin:2px 4px 0 0}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;min-width:640px}
+th,td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+td.r,th.r{text-align:right}.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+tr:hover td{background:color-mix(in srgb,var(--accent-soft) 40%,transparent)}
+.ev{display:inline-block;padding:1px 8px;border-radius:3px;font-size:12px;font-weight:500;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.ev.print{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}.ev.select{background:var(--warn-soft);color:var(--warn);border-color:var(--warn-soft)}
+.journey{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+.journey i{display:inline-block;width:8px;height:8px;border-radius:2px}
+.empty{color:var(--muted);font-size:14px;padding:6px 0}
+details.log summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+details.log summary::-webkit-details-marker{display:none}
+details.log summary .hint{font-size:13px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.skel{height:14px;background:linear-gradient(90deg,var(--bg),var(--accent-soft),var(--bg));background-size:200% 100%;animation:sh 1.2s linear infinite;border-radius:3px}
+@keyframes sh{to{background-position:-200% 0}}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.bar{grid-template-columns:110px 1fr 32px}}
 </style>
 </head>
 <body>
 <main>
   <header>
-    <div><h1>Heritage 2027 page: statistics</h1><p class="sub" id="sub">Live from the event log.</p></div>
-    <div class="actions"><button type="button" class="btn" id="refresh">Refresh</button><label class="auto"><input type="checkbox" id="auto" checked> every minute</label><button type="button" class="btn ghost" id="forget" hidden>Forget key</button></div>
+    <div class="lead">
+      <h1>Heritage 2027 page</h1>
+      <p class="sub">Who opened the services page, what they ticked, which proposals they printed.</p>
+      <span class="status"><span class="dot" id="dot"></span><span id="status">Waiting for the key.</span></span>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" id="refresh"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13.6 1.8v3h-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Refresh</button>
+      <label class="toggle" title="Reload the numbers every minute while this tab is open"><input type="checkbox" id="auto" checked>Auto refresh</label>
+      <button type="button" class="btn ghost" id="forget" hidden>Forget key</button>
+    </div>
   </header>
+
   <div class="key" id="keybox" hidden>
     <b>Read key</b>
     <span class="sub">Paste the statistics read key once. It stays in this browser only.</span>
     <div class="actions"><input type="password" id="key" autocomplete="off" placeholder="read key"><button type="button" class="btn" id="save">Save and load</button></div>
     <span class="err" id="err" hidden></span>
   </div>
+
   <div class="kpis" id="kpis"></div>
-  <section><h2>Proposals printed</h2><div class="wrap"><table id="prints"></table></div></section>
-  <section><h2>Visitors</h2><p class="sub">A browser is one visitor device, not a person.</p><div class="wrap"><table id="sessions"></table></div></section>
-  <section><h2>Event log</h2><p class="sub">Newest first, last 300. Crawler hits and direct GitHub hits are left out.</p><div class="wrap"><table id="log"></table></div></section>
+
+  <div class="grid2">
+    <section>
+      <div class="sechead"><h2>Activity</h2><span class="sub" id="act-sub"></span></div>
+      <svg class="chart" id="timeline" role="img" aria-label="Events per hour"></svg>
+      <div class="legend"><span><i class="c-view"></i>Views</span><span><i class="c-select"></i>Boxes toggled</span><span><i class="c-print"></i>Proposals printed</span></div>
+    </section>
+    <section>
+      <div class="sechead"><h2>Lines in printed proposals</h2></div>
+      <p class="sub">How often each optional line was ticked when a proposal was printed.</p>
+      <div class="bars" id="linebars"></div>
+    </section>
+  </div>
+
+  <section>
+    <div class="sechead"><h2>Proposals printed</h2><span class="sub" id="prints-sub"></span></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>Visitors</h2><span class="sub">A browser is one visitor device, not a person.</span></div>
+    <div class="wrap"><table id="sessions"></table></div>
+  </section>
+
+  <section>
+    <details class="log">
+      <summary><h2>Event log</h2><span class="hint" id="log-hint">Show</span></summary>
+      <p class="sub" style="margin-top:8px">Newest first, last 300. Crawler hits and direct GitHub hits are left out.</p>
+      <div class="wrap"><table id="log"></table></div>
+    </details>
+  </section>
 </main>
 <script>
 (function(){
   const URL_="https://cjszlbleajvvdgeyibir.supabase.co/rest/v1/rpc/artifact_events_read", KEY="sb_publishable_TkFE7VzQABaz1wxqGF-joQ_WAcmERFQ", ARTIFACT="heritage-2027-order-form";
-  const LINES={maintenance:"Maintenance",dpe:"DPE",development:"Feature requests",helpdesk:"Help Desk",foreman:"Foreman",growth:"Growth Pod"}, LOCKED=new Set(["maintenance","dpe"]);
+  const LINES={maintenance:"Maintenance",dpe:"DPE",development:"Feature requests",helpdesk:"Help Desk",foreman:"Foreman",growth:"Growth Pod"};
+  const OPTIONAL=["development","helpdesk","foreman","growth"], LOCKED=new Set(["maintenance","dpe"]);
   const BOT=/bot|crawler|spider|slurp|fetch|preview/i, SKIP_HOST="svenboettger-supernal.github.io";
   const $=id=>document.getElementById(id);
   const money=n=>"$"+Math.round(Number(n)||0).toLocaleString("en-US");
-  const when=t=>{ const d=new Date(t); return isNaN(d)?String(t):d.toLocaleString("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}); };
-  const linesOf=r=>{ const ids=((r.data||{}).lines)||[]; const o=ids.filter(i=>!LOCKED.has(i)).map(i=>LINES[i]||i); return o.length?o.join(", "):"Locked lines only"; };
+  const abs=t=>{ const d=new Date(t); return isNaN(d)?String(t):d.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}); };
+  const ago=t=>{ const d=new Date(t); if(isNaN(d)) return String(t); const s=Math.max(0,(Date.now()-d)/1000); if(s<60) return "just now"; if(s<3600) return Math.round(s/60)+" min ago"; if(s<86400) return Math.round(s/3600)+" h ago"; const days=Math.round(s/86400); return days===1?"yesterday":days+" days ago"; };
+  const linesOf=r=>((r.data||{}).lines)||[];
+  const optLines=r=>linesOf(r).filter(i=>!LOCKED.has(i)).map(i=>LINES[i]||i);
+  const linesText=r=>{ const o=optLines(r); return o.length?o.join(", "):"Locked lines only"; };
   const evLabel=r=>{ const d=r.data||{}; if(r.event==="print") return "Print"; if(r.event==="select") return (d.on?"Ticked ":"Unticked ")+(LINES[d.line]||d.line||""); return "View"; };
-  const td=(txt,cls)=>{ const c=document.createElement("td"); if(cls) c.className=cls; c.textContent=txt==null?"":String(txt); return c; };
-  const row=(cells)=>{ const tr=document.createElement("tr"); for(const c of cells) tr.appendChild(c instanceof Node?c:td(c)); return tr; };
-  const head=(tb,cols)=>{ tb.innerHTML=""; const tr=document.createElement("tr"); for(const [t,c] of cols){ const th=document.createElement("th"); if(c) th.className=c; th.textContent=t; tr.appendChild(th); } tb.appendChild(tr); };
-  const empty=(tb,n,txt)=>{ const tr=document.createElement("tr"); const c=td(txt,"empty"); c.colSpan=n; tr.appendChild(c); tb.appendChild(tr); };
+  const el=(tag,cls,txt)=>{ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=String(txt); return e; };
+  const td=(txt,cls)=>el("td",cls,txt==null?"":txt);
+  const row=cells=>{ const tr=el("tr"); for(const c of cells) tr.appendChild(c instanceof Node?c:td(c)); return tr; };
+  const head=(tb,cols)=>{ tb.innerHTML=""; const tr=el("tr"); for(const [t,c] of cols){ const th=el("th",c,t); tr.appendChild(th); } tb.appendChild(tr); };
+  const timeCell=t=>{ const c=td(ago(t)); c.title=abs(t); return c; };
+
   let key=""; try{ key=localStorage.getItem("hs-key")||""; }catch(_){}
-  let timer=null;
-  function showKey(msg){ $("keybox").hidden=false; $("forget").hidden=true; const e=$("err"); e.hidden=!msg; e.textContent=msg||""; }
+  let timer=null, lastRows=null;
+  function setStatus(txt,cls){ $("status").textContent=txt; $("dot").className="dot"+(cls?" "+cls:""); }
+  function showKey(msg){ $("keybox").hidden=false; $("forget").hidden=true; const e=$("err"); e.hidden=!msg; e.textContent=msg||""; setStatus("Waiting for the key.",""); }
+  function skeleton(){ const kp=$("kpis"); kp.innerHTML=""; for(let i=0;i<5;i++){ const d=el("div"); d.append(el("span","k"," "),el("span","skel"),el("span","s"," ")); kp.appendChild(d); } }
+
   async function load(){
     if(!key){ showKey(""); return; }
-    const b=$("refresh"); b.disabled=true;
+    const b=$("refresh"); b.disabled=true; b.classList.add("busy"); if(!lastRows) skeleton();
     try{
       const r=await fetch(URL_,{method:"POST",headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json"},body:JSON.stringify({p_key:key,p_artifact:ARTIFACT,p_limit:5000})});
-      if(r.status===403){ key=""; try{ localStorage.removeItem("hs-key"); }catch(_){} showKey("That key was not accepted."); return; }
+      if(r.status===403){ key=""; try{ localStorage.removeItem("hs-key"); }catch(_){} $("kpis").innerHTML=""; showKey("That key was not accepted."); return; }
       if(!r.ok) throw new Error("HTTP "+r.status);
       let rows=await r.json();
       rows=rows.filter(x=>x.event!=="test"&&!BOT.test(x.user_agent||"")&&(x.host||"")!==SKIP_HOST).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
-      render(rows); $("keybox").hidden=true; $("forget").hidden=false;
-      $("sub").textContent="Live from the event log. Loaded "+new Date().toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",second:"2-digit"})+(rows.length?", events from "+[...new Set(rows.map(x=>x.host).filter(Boolean))].join(", "):", nothing logged yet")+".";
-    }catch(e){ $("sub").textContent="Could not load the event log ("+(e&&e.message||"error")+"). Check the connection and press Refresh."; }
-    finally{ b.disabled=false; }
+      lastRows=rows; render(rows); $("keybox").hidden=true; $("forget").hidden=false;
+      setStatus("Live. Updated "+new Date().toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",second:"2-digit"})+".","live");
+    }catch(e){ setStatus("Could not load ("+(e&&e.message||"error")+"). Press Refresh.","err"); }
+    finally{ b.disabled=false; b.classList.remove("busy"); }
   }
+
   function render(rows){
-    const views=rows.filter(r=>r.event==="view").length, prints=rows.filter(r=>r.event==="print"), selects=rows.filter(r=>r.event==="select").length;
+    const views=rows.filter(r=>r.event==="view"), prints=rows.filter(r=>r.event==="print"), selects=rows.filter(r=>r.event==="select");
+    const dayAgo=Date.now()-86400000; const today=x=>new Date(x.created_at)>dayAgo;
     const sessions=new Map();
-    for(const r of rows){ const sid=r.session_id||r.id; let s=sessions.get(sid); if(!s){ s={host:r.host||"",last:r.created_at,first:r.created_at,views:0,selects:0,prints:0,lastLines:linesOf(r),lastMonth:(r.data||{}).month}; sessions.set(sid,s); } s.first=r.created_at; s[r.event==="select"?"selects":r.event==="print"?"prints":"views"]++; }
+    for(const r of rows){ const sid=r.session_id||r.id; let s=sessions.get(sid); if(!s){ s={host:r.host||"",last:r.created_at,first:r.created_at,views:0,selects:0,prints:0,lastLines:linesText(r),lastMonth:(r.data||{}).month,events:[]}; sessions.set(sid,s); } s.first=r.created_at; s[r.event==="select"?"selects":r.event==="print"?"prints":"views"]++; s.events.unshift(r.event); }
+    /* KPIs */
     const kp=$("kpis"); kp.innerHTML="";
-    for(const [k,v] of [["Views",views],["Proposals printed",prints.length],["Boxes toggled",selects],["Browsers",sessions.size],["Last activity",rows[0]?when(rows[0].created_at):"none yet"]]){ const d=document.createElement("div"); const a=document.createElement("span"); a.className="k"; a.textContent=k; const b=document.createElement("span"); b.className="v"; b.textContent=String(v); d.append(a,b); kp.appendChild(d); }
-    const tp=$("prints"); head(tp,[["When"],["Reference"],["Lines ticked"],["Per month","r"],["People","r"],["Where"],["Browser"]]);
-    if(!prints.length) empty(tp,7,"No proposal printed yet.");
-    for(const r of prints) tp.appendChild(row([when(r.created_at),td(r.ref||"","mono"),linesOf(r),td(money((r.data||{}).month),"r"),td((r.data||{}).people,"r"),r.host||"",td((r.session_id||"").slice(0,6),"mono")]));
-    const ts=$("sessions"); head(ts,[["Browser"],["Where"],["First seen"],["Last seen"],["Views","r"],["Toggles","r"],["Prints","r"],["Last selection"],["Per month","r"]]);
-    if(!sessions.size) empty(ts,9,"No visits yet.");
-    for(const [sid,s] of sessions) ts.appendChild(row([td(sid.slice(0,6),"mono"),s.host,when(s.first),when(s.last),td(s.views,"r"),td(s.selects,"r"),td(s.prints,"r"),s.lastLines,td(money(s.lastMonth),"r")]));
-    const tl=$("log"); head(tl,[["When"],["Browser"],["Where"],["Event"],["Lines ticked"],["Per month","r"],["Reference"]]);
-    if(!rows.length) empty(tl,7,"Nothing logged yet.");
-    for(const r of rows.slice(0,300)){ const e=document.createElement("span"); e.className="ev "+r.event; e.textContent=evLabel(r); const c=document.createElement("td"); c.appendChild(e); tl.appendChild(row([when(r.created_at),td((r.session_id||"").slice(0,6),"mono"),r.host||"",c,linesOf(r),td(money((r.data||{}).month),"r"),td(r.ref||"","mono")])); }
+    const kpi=(k,v,s)=>{ const d=el("div"); d.append(el("span","k",k),el("span","v num",v),el("span","s",s)); kp.appendChild(d); };
+    kpi("Views",views.length,views.filter(today).length+" in the last 24 h");
+    kpi("Visitors",sessions.size,[...sessions.values()].filter(s=>new Date(s.last)>dayAgo).length+" active in the last 24 h");
+    kpi("Proposals printed",prints.length,prints.length?"latest "+ago(prints[0].created_at):"none yet");
+    kpi("Boxes toggled",selects.length,selects.length?Math.round(selects.length/Math.max(1,sessions.size)*10)/10+" per visitor":"none yet");
+    kpi("Last activity",rows[0]?ago(rows[0].created_at):"none",rows[0]?abs(rows[0].created_at):"nothing logged yet");
+    /* timeline: events per hour over the last 48 hours, or per day if the log is older */
+    drawTimeline(rows);
+    /* lines in printed proposals */
+    const lb=$("linebars"); lb.innerHTML="";
+    const counts=Object.fromEntries(OPTIONAL.map(k=>[k,0])); for(const p of prints) for(const i of linesOf(p)) if(i in counts) counts[i]++;
+    const onlyLocked=prints.filter(p=>!linesOf(p).some(i=>!LOCKED.has(i))).length;
+    const max=Math.max(1,...Object.values(counts),onlyLocked);
+    const items=OPTIONAL.map(k=>[LINES[k],counts[k]]).concat([["Locked lines only",onlyLocked]]);
+    if(!prints.length) lb.appendChild(el("p","empty","No proposal printed yet."));
+    else for(const [name,n] of items){ const b=el("div","bar"); const f=el("div","fill"); f.style.width=(n/max*100)+"%"; const tr=el("div","track"); tr.appendChild(f); b.append(el("span","t",name),tr,el("span","n num",n)); lb.appendChild(b); }
+    /* proposal cards */
+    const cards=$("cards"); cards.innerHTML=""; $("prints-sub").textContent=prints.length?prints.length+(prints.length===1?" proposal":" proposals")+", newest first":"";
+    if(!prints.length) cards.appendChild(el("p","empty","No proposal printed yet. When Heritage presses Print proposal, it shows up here with its reference code."));
+    for(const p of prints){ const d=p.data||{}; const c=el("div","card"); const rf=el("div","ref"); rf.append(el("span",null,p.ref||"no reference"),el("span",null,ago(p.created_at))); rf.title=abs(p.created_at);
+      const amt=el("div","amt num",money(d.month)); const per=el("div","meta",money(d.year||(d.month||0)*12)+" per year"+(d.people?", "+d.people+(d.people===1?" person":" people"):""));
+      const ln=el("div","lines"); const o=optLines(p); if(o.length) for(const x of o) ln.appendChild(el("span","pill",x)); else ln.appendChild(el("span","pill","Locked lines only"));
+      const meta=el("div","meta",(p.host||"")+(p.session_id?" · browser "+p.session_id.slice(0,6):"")); c.append(rf,amt,per,ln,meta); cards.appendChild(c); }
+    /* sessions */
+    const ts=$("sessions"); head(ts,[["Browser"],["Where"],["First seen"],["Last seen"],["Journey"],["Views","r"],["Toggles","r"],["Prints","r"],["Last selection"],["Per month","r"]]);
+    if(!sessions.size){ const tr=el("tr"); const c=td("No visits yet.","empty"); c.colSpan=10; tr.appendChild(c); ts.appendChild(tr); }
+    for(const [sid,s] of sessions){ const j=el("div","journey"); for(const e of s.events.slice(-40)){ const i=el("i","c-"+e); i.title=e; j.appendChild(i); } const jc=el("td"); jc.appendChild(j);
+      ts.appendChild(row([td(sid.slice(0,6),"mono"),s.host,timeCell(s.first),timeCell(s.last),jc,td(s.views,"r"),td(s.selects,"r"),td(s.prints,"r"),s.lastLines,td(money(s.lastMonth),"r")])); }
+    /* log */
+    const tl=$("log"); head(tl,[["When"],["Browser"],["Where"],["Event"],["Lines ticked"],["Per month","r"],["Reference"]]); $("log-hint").textContent=(document.querySelector("details.log").open?"Hide ":"Show ")+rows.length+" events";
+    if(!rows.length){ const tr=el("tr"); const c=td("Nothing logged yet.","empty"); c.colSpan=7; tr.appendChild(c); tl.appendChild(tr); }
+    for(const r of rows.slice(0,300)){ const c=el("td"); c.appendChild(el("span","ev "+r.event,evLabel(r))); tl.appendChild(row([timeCell(r.created_at),td((r.session_id||"").slice(0,6),"mono"),r.host||"",c,linesText(r),td(money((r.data||{}).month),"r"),td(r.ref||"","mono")])); }
   }
-  function schedule(){ if(timer) clearInterval(timer); timer=null; if($("auto").checked) timer=setInterval(()=>{ if(!document.hidden) load(); },60000); }
+
+  function drawTimeline(rows){
+    const svg=$("timeline"); svg.innerHTML=""; const NS="http://www.w3.org/2000/svg";
+    const mk=(n,at,txt)=>{ const e=document.createElementNS(NS,n); for(const k in at) e.setAttribute(k,at[k]); if(txt!=null) e.textContent=txt; svg.appendChild(e); return e; };
+    const now=new Date(); const oldest=rows.length?new Date(rows[rows.length-1].created_at):now;
+    const byDay=(now-oldest)>48*3600000; const span=byDay?Math.min(30,Math.ceil((now-oldest)/86400000)+1):48; const step=byDay?86400000:3600000;
+    const start=byDay?new Date(now.getFullYear(),now.getMonth(),now.getDate()-(span-1)):new Date(now.getFullYear(),now.getMonth(),now.getDate(),now.getHours()-(span-1));
+    const buckets=[]; for(let i=0;i<span;i++) buckets.push({t:new Date(start.getTime()+i*step),view:0,select:0,print:0});
+    for(const r of rows){ const i=Math.floor((new Date(r.created_at)-start)/step); if(i>=0&&i<span&&buckets[i][r.event]!=null) buckets[i][r.event]++; }
+    $("act-sub").textContent=byDay?"Per day, last "+span+" days":"Per hour, last 48 hours";
+    const W=640,H=180,padL=28,padR=8,top=14,base=150; const bw=(W-padL-padR)/span;
+    const maxV=Math.max(1,...buckets.map(b=>b.view+b.select+b.print)); const sc=(base-top)/maxV;
+    svg.setAttribute("viewBox","0 0 "+W+" "+H);
+    for(const g of [0,Math.ceil(maxV/2),maxV]){ const y=base-g*sc; mk("line",{x1:padL,y1:y,x2:W-padR,y2:y,class:"axis",stroke:"var(--line)","stroke-dasharray":g?"2 3":"0"}); mk("text",{x:padL-4,y:y+4,"text-anchor":"end",class:"lbl"},g); }
+    buckets.forEach((b,i)=>{ const x=padL+i*bw+1, w=Math.max(1,bw-2); let y=base;
+      for(const [k,col] of [["view","var(--accent-mid)"],["select","var(--warn)"],["print","var(--accent)"]]){ const h=b[k]*sc; if(h>0){ mk("rect",{x,y:y-h,width:w,height:h,fill:col}); y-=h; } }
+      const tot=b.view+b.select+b.print; if(tot>0&&bw>14) mk("text",{x:x+w/2,y:y-3,"text-anchor":"middle",class:"val"},tot);
+      const lab=byDay?(i%Math.ceil(span/8)===0?b.t.toLocaleDateString("en-US",{month:"short",day:"numeric"}):""):(b.t.getHours()%6===0?b.t.toLocaleTimeString("en-US",{hour:"numeric"}).replace(" ",""):"");
+      if(lab) mk("text",{x:x+w/2,y:base+14,"text-anchor":"middle",class:"lbl"},lab); });
+    mk("line",{x1:padL,y1:base+.5,x2:W-padR,y2:base+.5,class:"axis"});
+  }
+
+  function schedule(){ if(timer) clearInterval(timer); timer=null; if($("auto").checked) timer=setInterval(()=>{ if(!document.hidden&&key) load(); },60000); }
+  document.querySelector("details.log").addEventListener("toggle",()=>{ const d=document.querySelector("details.log"); const n=(lastRows||[]).length; $("log-hint").textContent=(d.open?"Hide ":"Show ")+n+" events"; });
   $("refresh").addEventListener("click",load);
   $("auto").addEventListener("change",schedule);
   $("save").addEventListener("click",()=>{ const v=$("key").value.trim(); if(!v) return; key=v; try{ localStorage.setItem("hs-key",v); }catch(_){} $("key").value=""; load(); });
   $("key").addEventListener("keydown",e=>{ if(e.key==="Enter") $("save").click(); });
-  $("forget").addEventListener("click",()=>{ key=""; try{ localStorage.removeItem("hs-key"); }catch(_){} $("kpis").innerHTML=""; for(const id of ["prints","sessions","log"]) $(id).innerHTML=""; showKey(""); });
+  $("forget").addEventListener("click",()=>{ key=""; lastRows=null; try{ localStorage.removeItem("hs-key"); }catch(_){} $("kpis").innerHTML=""; $("cards").innerHTML=""; $("linebars").innerHTML=""; $("timeline").innerHTML=""; for(const id of ["sessions","log"]) $(id).innerHTML=""; showKey(""); });
   document.addEventListener("visibilitychange",()=>{ if(!document.hidden&&key) load(); });
+  /* layout check without a key: #demo renders sample rows, nothing is stored or sent */
+  if(location.hash==="#demo"){ const now=Date.now(); const mkRow=(min,ev,sid,lines,extra)=>Object.assign({created_at:new Date(now-min*60000).toISOString(),event:ev,session_id:sid,host:"2027-heritage.links.getsupernal.ai",data:{lines,month:lines.length*20000+3207,year:(lines.length*20000+3207)*12,people:lines.length+1}},extra||{});
+    const demo=[mkRow(2,"print","aaa111",["maintenance","dpe","development"],{ref:"HP-1K-DEMO1"}),mkRow(3,"select","aaa111",["maintenance","dpe","development"],{data:{line:"development",on:true,lines:["maintenance","dpe","development"],month:103207}}),mkRow(5,"view","aaa111",["maintenance","dpe"]),mkRow(140,"print","bbb222",["maintenance","dpe","development","helpdesk"],{ref:"HP-1S-DEMO2"}),mkRow(150,"view","bbb222",["maintenance","dpe"]),mkRow(1500,"print","ccc333",["maintenance","dpe"],{ref:"HP-1C-DEMO3"}),mkRow(1510,"view","ccc333",["maintenance","dpe"]),mkRow(2000,"view","ddd444",["maintenance","dpe"])];
+    lastRows=demo; render(demo); $("keybox").hidden=true; setStatus("Demo data, not live.","err"); return; }
   load(); schedule();
 })();
 </script>
