@@ -145,11 +145,12 @@ details.log summary .hint{font-size:13px;color:var(--accent);text-decoration:und
     <p class="sub">Open the Heritage page once with this link in every browser you use. That browser is then never logged again. The same link with <code>#track</code> switches it back on.</p>
     <p><a class="optout" href="https://2027-heritage.links.getsupernal.ai/#ignore" target="_blank" rel="noopener">https://2027-heritage.links.getsupernal.ai/#ignore</a></p>
     <p class="sub">Visits from the Supernal home network are also filtered out on the server, whatever the browser.</p>
+    <p class="sub">Counting since 15 Oct 2026, 16:25 Berlin. Everything logged before that was internal testing and is hidden.</p>
   </section>
 </main>
 <script>
 (function(){
-  const URL_="https://cjszlbleajvvdgeyibir.supabase.co/rest/v1/rpc/artifact_events_read", KEY="sb_publishable_TkFE7VzQABaz1wxqGF-joQ_WAcmERFQ", ARTIFACT="heritage-2027-order-form";
+  const URL_="https://cjszlbleajvvdgeyibir.supabase.co/rest/v1/rpc/artifact_events_read", KEY="sb_publishable_TkFE7VzQABaz1wxqGF-joQ_WAcmERFQ", ARTIFACT="heritage-2027-order-form", SINCE="2026-10-15T14:25:00Z"; /* counters were reset on 15 Oct 2026, 16:25 Berlin */
   const LINES={maintenance:"Maintenance",dpe:"DPE",development:"Feature requests",helpdesk:"Help Desk",foreman:"Foreman",growth:"Growth Pod"};
   const OPTIONAL=["development","helpdesk","foreman","growth"], LOCKED=new Set(["maintenance","dpe"]);
   const BOT=/bot|crawler|spider|slurp|fetch|preview/i, SKIP_HOST="svenboettger-supernal.github.io";
@@ -181,7 +182,7 @@ details.log summary .hint{font-size:13px;color:var(--accent);text-decoration:und
       if(r.status===403){ key=""; try{ localStorage.removeItem("hs-key"); }catch(_){} $("kpis").innerHTML=""; showKey("That key was not accepted."); return; }
       if(!r.ok) throw new Error("HTTP "+r.status);
       let rows=await r.json();
-      rows=rows.filter(x=>x.event!=="test"&&!BOT.test(x.user_agent||"")&&(x.host||"")!==SKIP_HOST).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+      rows=rows.filter(x=>String(x.created_at)>=SINCE&&x.event!=="test"&&!BOT.test(x.user_agent||"")&&(x.host||"")!==SKIP_HOST).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
       lastRows=rows; render(rows); $("keybox").hidden=true; $("forget").hidden=false;
       setStatus("Live. Updated "+new Date().toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",second:"2-digit"})+".","live");
     }catch(e){ setStatus("Could not load ("+(e&&e.message||"error")+"). Press Refresh.","err"); }
